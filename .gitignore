@@ -1,0 +1,30 @@
+# Compiled files
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/
+
+# Visual Studio
+.vs/
+
+# Logs
+*.log
+
+# Database
+*.db
+*.mdf
+*.ldf
+
+# Secrets
+appsettings.Production.json
+secrets.json
+
+# Others
+TestResults/
