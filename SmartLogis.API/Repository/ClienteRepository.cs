@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SmartLogis.API.Data;
 using SmartLogis.API.Models;
-using SmartLogis.API.Repository.IRepository;
+using SmartLogis.API.Repository.Interfaces;
 
 namespace SmartLogis.API.Repository;
 
@@ -27,45 +28,47 @@ public class ClienteRepository : IClienteRepository
     {
         return _db.Cliente.Any(cliente => cliente.IdCliente == id);
     }
-
-    public bool CreateCliente(Cliente cliente)
-    {
-        cliente.CreationDate = DateTime.Now;
-        cliente.ModificationDate = DateTime.Now;
-        _db.Cliente.Add(cliente);
-        return Save();
-    }
-
-    public bool DeleteCliente(Cliente cliente)
-    {
-        _db.Cliente.Remove(cliente);
-        return Save();
-    }
-
-    public Cliente? GetCliente(int id)
-    {
-        return _db.Cliente.FirstOrDefault(cliente => cliente.IdCliente == id);
-    }
-
-    public ICollection<Cliente> GetClientes()
-    {
-        return _db.Cliente.OrderBy(cliente => cliente.Nombre).ToList();
-    }
-
+    
     public ICollection<Envio> GetEnviosByCliente(int idCliente)
     {
         return _db.Envio.Where(envio => envio.IdCliente == idCliente).ToList();
     }
 
-    public bool Save()
+    public async Task<IEnumerable<Cliente>> GetAllAsync()
     {
-        return _db.SaveChanges() >= 0 ? true : false;
+        return await _db.Cliente.ToListAsync();
     }
 
-    public bool UpdateCliente(Cliente cliente)
+    public async Task<Cliente?> GetByIdAsync(int id)
     {
-        cliente.ModificationDate = DateTime.Now;
-        _db.Cliente.Update(cliente);
-        return Save();
+        return await _db.Cliente.FirstOrDefaultAsync(c => c.IdCliente == id);
+    }
+
+    public async Task<bool> AddAsync(Cliente entity)
+    {
+        _db.Cliente.Add(entity);
+        return await SaveAsync();
+    }
+
+    public async Task<bool> UpdateAsync(Cliente entity)
+    {
+        _db.Cliente.Update(entity);
+        return await SaveAsync();
+    }
+
+    public async Task<bool> DeleteAsync(Cliente entity)
+    {
+        _db.Cliente.Remove(entity);
+        return await SaveAsync();
+    }
+
+    public async Task<bool> SaveAsync()
+    {
+        return await _db.SaveChangesAsync() >= 0 ? true : false;
+    }
+
+    public async Task<IEnumerable<Cliente>> FindAsync(Expression<Func<Cliente, bool>> expression)
+    {
+        return await _db.Cliente.Where(expression).ToListAsync();
     }
 }
