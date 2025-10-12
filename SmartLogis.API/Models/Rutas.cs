@@ -19,5 +19,7 @@ namespace SmartLogis.API.Models
         public int IdEstatus { get; set; }
         [ForeignKey("IdEstatus")]
         public required Estatus Estatus { get; set; }
+        public ICollection<DetallesEnvio> DetallesEnvio { get; set; } = new List<DetallesEnvio>();
+
     }
 }

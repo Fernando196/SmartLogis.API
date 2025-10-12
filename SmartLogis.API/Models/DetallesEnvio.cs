@@ -10,15 +10,22 @@ namespace SmartLogis.API.Models
     public class DetallesEnvio
     {
         [Key]
+        [Column("idDetalle")]
         public int IdDetalle { get; set; }
+        [Column("idEnvio")]
         public int IdEnvio { get; set; }
+        [Column("idTransportista")]
         public int IdTransportista { get; set; }
+        [Column("idRuta")]
         public int IdRuta { get; set; }
+        [Column("idEstatus")]
         public int IdEstatus { get; set; }
+        [Column("descripcionCarga")]
         public string DescripcionCarga { get; set; } = string.Empty;
+        [Column("cantidad")]
         public int Cantidad { get; set; }
         [Range(0, double.MaxValue)]
-        [Column(TypeName = "decimal(18,2)")]
+        [Column("peso",TypeName = "decimal(18,2)")]
         public decimal Peso { get; set; }
 
         [ForeignKey("IdEnvio")]
