@@ -24,9 +24,9 @@ namespace SmartLogis.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetClientes()
+        public async Task<IActionResult> GetClientes([FromBody] FilterRequest body)
         {
-            var clientes = await _clienteService.GetAllAsync();
+            var clientes = await _clienteService.GetAllAsync(body.Filters);
             var clientesDto = clientes.Adapt<List<ClienteDto>>();
             return Ok(clientesDto);
         }
@@ -51,12 +51,24 @@ namespace SmartLogis.API.Controllers
             }
 
             var cliente = createClienteDto.Adapt<Cliente>();
-            if (!await _clienteService.CreateAsync(cliente))
-            {
-                return StatusCode(500, "Ocurrio un problema al crear el cliente");
-            }
-            var createdClientDto = cliente.Adapt<ClienteDto>();
+            var createdCliente = await _clienteService.CreateAsync(cliente);
+            var createdClientDto = createdCliente.Adapt<ClienteDto>();
             return CreatedAtRoute("GetCliente", new { id = createdClientDto.IdCliente }, createdClientDto);
+        }
+        [HttpPut("{id}",Name = "UpdateCliente")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> UpdateCliente(int id,[FromBody] UpdateClienteDto updateClienteDto)
+        {
+            if (updateClienteDto == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var cliente = updateClienteDto.Adapt<Cliente>();
+            await _clienteService.UpdateAsync(id,cliente);
+            return NoContent();
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SmartLogis.API.Data;
+using SmartLogis.API.Helpers;
 using SmartLogis.API.Models;
 using SmartLogis.API.Repository.Interfaces;
 
@@ -39,9 +40,9 @@ public class ClienteRepository : IClienteRepository
         return _db.Envio.Where(envio => envio.IdCliente == idCliente).ToList();
     }
 
-    public async Task<IEnumerable<Cliente>> GetAllAsync()
+    public IQueryable<Cliente> GetAllQueryable()
     {
-        return await _db.Cliente.ToListAsync();
+        return _db.Cliente.AsQueryable();
     }
 
     public async Task<Cliente?> GetByIdAsync(int id)

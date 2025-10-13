@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SmartLogis.API.Repository.Interfaces;
 public interface IReposityBase<T>
 {
-    Task<IEnumerable<T>> GetAllAsync();
+    IQueryable<T> GetAllQueryable();
     Task<T?> GetByIdAsync(int id);
     Task<bool> AddAsync(T entity);
     Task<bool> UpdateAsync(T entity);

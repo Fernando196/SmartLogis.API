@@ -9,11 +9,10 @@ namespace SmartLogis.API.Services.Interfaces
 {
     public interface IServiceBase<T>
     {
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync(Dictionary<string, Filter> body);
         Task<T?> GetByIdAsync(int id);
-        Task<bool> CreateAsync(T entity);
-        Task<bool> UpdateAsync(int id, T entity);
-        Task<bool> DeleteAsync(int id);
-        Task<IEnumerable<T>> FindAsync(FiltrosDto filtrosDto);
+        Task<T> CreateAsync(T entity);
+        Task UpdateAsync(int id, T entity);
+        Task DeleteAsync(int id);
     }
 }

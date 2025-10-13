@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using SmartLogis.API.Helpers;
 using SmartLogis.API.Models;
 using SmartLogis.API.Models.Middlewares;
-using SmartLogis.API.Repository;
 using SmartLogis.API.Repository.Interfaces;
 using SmartLogis.API.Services.Interfaces;
 
@@ -22,34 +18,52 @@ public class ClienteService : IClienteService
         _clientRepository = clienteRepository;
     }
 
-    public async Task<bool> CreateAsync(Cliente cliente)
+    public async Task<Cliente> CreateAsync(Cliente cliente)
     {
-        if (await _clientRepository.ClienteExists(cliente.Nombre))
-            throw new ApiException(400,"El cliente ya existe");
-        if (await _clientRepository.RFCClienteExists(cliente.RFC))
-            throw new ApiException(400,"La rfc del cliente ya existe");
+        // Validaciones de negocio
+        if (string.IsNullOrWhiteSpace(cliente.Nombre))
+            throw new ApiException(400, "El nombre del cliente es requerido");
 
-        return await _clientRepository.AddAsync(cliente);
+        if (string.IsNullOrWhiteSpace(cliente.RFC))
+            throw new ApiException(400, "El RFC del cliente es requerido");
+
+        // Verificar duplicados
+        if (await _clientRepository.ClienteExists(cliente.Nombre))
+            throw new ApiException(400, "Ya existe un cliente con ese nombre");
+            
+        if (await _clientRepository.RFCClienteExists(cliente.RFC))
+            throw new ApiException(400, "Ya existe un cliente con ese RFC");
+
+        var createdCliente = await _clientRepository.AddAsync(cliente);
+        if (!createdCliente)
+        {
+            throw new ApiException(500, "Ocurrio un problema al crear el cliente");
+        }
+        return cliente;
     }
 
-    public async Task<bool> DeleteAsync(int idCliente)
+    public async Task DeleteAsync(int idCliente)
     {
         var cli = await _clientRepository.GetByIdAsync(idCliente);
 
         if (cli == null)
-            throw new ApiException(404,"El cliente no exsite");
-        
-        return await _clientRepository.DeleteAsync(cli);
-    }
+            throw new ApiException(404, "El cliente no exsite");
 
-    public async Task<IEnumerable<Cliente>> FindAsync(FiltrosDto filtrosDto)
-    {
-        return await _clientRepository.FindAsync(c => c.IdEstatus == 1);
+        await _clientRepository.DeleteAsync(cli);
     }
-
-    public async Task<IEnumerable<Cliente>> GetAllAsync()
+    
+    public async Task<IEnumerable<Cliente>> GetAllAsync(Dictionary<string, Filter> filters)
     {
-        return await _clientRepository.GetAllAsync();
+        try
+        {
+            var query = _clientRepository.GetAllQueryable();
+            query = query.ApplyFilters(filters);
+            return await query.ToListAsync();
+        }catch(Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return new List<Cliente>();
+        }
     }
 
     public async Task<Cliente?> GetByIdAsync(int id)
@@ -61,17 +75,16 @@ public class ClienteService : IClienteService
         return cliente;
     }
 
-    public async Task<bool> UpdateAsync(int id, Cliente cliente)
+    public async Task UpdateAsync(int id, Cliente cliente)
     {
-        if (await _clientRepository.ClienteExists(id))
-            throw new ApiException(404,"No existe el cliente");
+        if (!await _clientRepository.ClienteExists(id))
+            throw new Exception("El cliente no existe");
 
         cliente.IdCliente = id;
         var updateCliente = await _clientRepository.UpdateAsync(cliente);
         if (!updateCliente)
         {
-            throw new ApiException(500,"Ocurrio un problema al actualizar el cliente");
+            throw new Exception("Error al actualizar el cliente");
         }
-        return updateCliente;
     }
 }
