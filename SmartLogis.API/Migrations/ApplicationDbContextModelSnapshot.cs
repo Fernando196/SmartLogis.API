@@ -72,7 +72,8 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Ciudad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
                         .HasColumnName("ciudad");
 
                     b.Property<DateTime>("CreationDate")
@@ -81,12 +82,13 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Direccion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
                         .HasColumnName("direccion");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)")
                         .HasColumnName("email");
 
                     b.Property<int>("IdCreationUser")
@@ -97,32 +99,35 @@ namespace SmartLogis.API.Migrations
                         .HasColumnType("int")
                         .HasColumnName("idEstatus");
 
-                    b.Property<int>("IdModificationUser")
+                    b.Property<int?>("IdModificationUser")
                         .HasColumnType("int")
                         .HasColumnName("idModificationUser");
 
-                    b.Property<DateTime>("ModificationDate")
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("modificationDate");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("nombre");
 
                     b.Property<string>("Pais")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)")
                         .HasColumnName("pais");
 
                     b.Property<string>("RFC")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)")
                         .HasColumnName("rfc");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(12)
+                        .HasColumnType("nvarchar(12)")
                         .HasColumnName("telefono");
 
                     b.HasKey("IdCliente");

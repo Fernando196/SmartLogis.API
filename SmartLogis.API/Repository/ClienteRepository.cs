@@ -19,14 +19,19 @@ public class ClienteRepository : IClienteRepository
         _db = db;
     }
 
-    public bool ClienteExists(string nombre)
+    public Task<bool> ClienteExists(string nombre)
     {
-        return _db.Cliente.Any(cliente => cliente.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
+        return _db.Cliente.AnyAsync(cliente => cliente.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
     }
 
-    public bool ClienteExists(int id)
+    public Task<bool> ClienteExists(int id)
     {
-        return _db.Cliente.Any(cliente => cliente.IdCliente == id);
+        return _db.Cliente.AnyAsync(cliente => cliente.IdCliente == id);
+    }
+
+    public Task<bool> RFCClienteExists(string rfc)
+    {
+        return _db.Cliente.AnyAsync(cliente => cliente.RFC == rfc);
     }
     
     public ICollection<Envio> GetEnviosByCliente(int idCliente)

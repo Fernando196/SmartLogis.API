@@ -6,9 +6,10 @@ using SmartLogis.API.Models;
 
 namespace SmartLogis.API.Repository.Interfaces;
 
-public interface IClienteRepository: IReposityBase<Cliente>
+public interface IClienteRepository : IReposityBase<Cliente>
 {
     ICollection<Envio> GetEnviosByCliente(int idCliente);
-    bool ClienteExists(string nombre);
-    bool ClienteExists(int id);
+    Task<bool> ClienteExists(string nombre);
+    Task<bool> ClienteExists(int id);
+    Task<bool> RFCClienteExists(string rfc);
 }
