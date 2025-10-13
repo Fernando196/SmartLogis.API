@@ -52,12 +52,13 @@ public class ClienteService : IClienteService
         await _clientRepository.DeleteAsync(cli);
     }
     
-    public async Task<IEnumerable<Cliente>> GetAllAsync(Dictionary<string, Filter> filters)
+    public async Task<IEnumerable<Cliente>> GetAllAsync(Dictionary<string, Filter>? filters)
     {
         try
         {
             var query = _clientRepository.GetAllQueryable();
-            query = query.ApplyFilters(filters);
+            if(filters != null)
+                query = query.ApplyFilters(filters);
             return await query.ToListAsync();
         }catch(Exception e)
         {
@@ -73,6 +74,15 @@ public class ClienteService : IClienteService
             throw new ApiException(404,"No se encotro el cliente");
 
         return cliente;
+    }
+
+    public async Task<ICollection<Envio>> GetEnviosByCliente(int idCliente)
+    {
+        if(!await _clientRepository.ClienteExists(idCliente))
+        {
+            throw new ApiException(404, "El cliente no existe");
+        }
+        return await _clientRepository.GetEnviosByCliente(idCliente);
     }
 
     public async Task UpdateAsync(int id, Cliente cliente)

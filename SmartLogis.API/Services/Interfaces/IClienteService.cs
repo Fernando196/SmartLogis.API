@@ -7,5 +7,5 @@ using SmartLogis.API.Models;
 namespace SmartLogis.API.Services.Interfaces;
 public interface IClienteService: IServiceBase<Cliente>
 {
-    
+    Task<ICollection<Envio>> GetEnviosByCliente(int idCliente);
 }

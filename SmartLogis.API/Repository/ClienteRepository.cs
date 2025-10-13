@@ -35,9 +35,9 @@ public class ClienteRepository : IClienteRepository
         return _db.Cliente.AnyAsync(cliente => cliente.RFC == rfc);
     }
     
-    public ICollection<Envio> GetEnviosByCliente(int idCliente)
+    public async Task<ICollection<Envio>> GetEnviosByCliente(int idCliente)
     {
-        return _db.Envio.Where(envio => envio.IdCliente == idCliente).ToList();
+        return await _db.Envio.Where(envio => envio.IdCliente == idCliente).ToListAsync();
     }
 
     public IQueryable<Cliente> GetAllQueryable()
