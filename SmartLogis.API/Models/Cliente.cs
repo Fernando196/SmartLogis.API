@@ -10,7 +10,7 @@ namespace SmartLogis.API.Models
 {
     public class Cliente
     {
-        [Column("idUsuario")]
+        [Column("idCliente")]
         [Key]
         public int IdCliente { get; set; }
         [Column("idEstatus")]
