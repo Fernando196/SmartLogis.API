@@ -29,9 +29,11 @@ namespace SmartLogis.API.Models.Dtos
         [MaxLength(120,ErrorMessage = "El pais no puede exceder los 120 caracteres")]
         public string Pais { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "El telefono es requerido")]
-        [MaxLength(12, ErrorMessage = "El telefono no puede exceder los 12 caracteres")]
+        [Phone(ErrorMessage = "El formato del teléfono no es válido")]
+        [MaxLength(15, ErrorMessage = "El telefono no puede exceder los 15 caracteres")]
         public string Telefono { get; set; } = string.Empty;
+        
+        [EmailAddress(ErrorMessage = "El formato del email no es válido")]
         [MaxLength(250, ErrorMessage = "El email no puede exceder los 250 caracteres")]
         public string Email { get; set; } = string.Empty;
     }
