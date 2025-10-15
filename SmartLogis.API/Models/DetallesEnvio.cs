@@ -20,8 +20,9 @@ namespace SmartLogis.API.Models
         public int IdRuta { get; set; }
         [Column("idEstatus")]
         public int IdEstatus { get; set; }
-        [Column("descripcionCarga")]
-        public string DescripcionCarga { get; set; } = string.Empty;
+        [Column("decripcionCarga")]
+        [MaxLength(350)]
+        public string? DescripcionCarga { get; set; } = string.Empty;
         [Column("cantidad")]
         public int Cantidad { get; set; }
         [Range(0, double.MaxValue)]

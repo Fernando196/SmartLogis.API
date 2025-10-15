@@ -16,18 +16,23 @@ namespace SmartLogis.API.Models
         public int IdEstatus { get; set; }
         [Required]
         [Column("nombre")]
+        [MaxLength(150)]
         public string Nombre { get; set; } = string.Empty;
         [Required]
         [Column("tipoUnidad")]
+        [MaxLength(150)]
         public string TipoUnidad { get; set; } = string.Empty;
         [Required]
         [Column("placas")]
+        [MaxLength(30)]
         public string Placas { get; set; } = string.Empty;
         [Required]
         [Column("telefono")]
+        [MaxLength(20)]
         public string Telefono { get; set; } = string.Empty;
         [Required]
         [Column("email")]
+        [MaxLength(150)]
         public string Email { get; set; } = string.Empty;
 
         [ForeignKey("IdEstatus")]

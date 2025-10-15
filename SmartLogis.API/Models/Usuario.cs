@@ -13,12 +13,16 @@ namespace SmartLogis.API.Models
         [Column("idUsuario")]
         public int IdUsuario { get; set; }
         [Column("nombre")]
+        [MaxLength(150)]
         public string Nombre { get; set; } = string.Empty;
         [Column("email")]
+        [MaxLength(150)]
         public string Email { get; set; } = string.Empty;
         [Column("password")]
+        [MaxLength(500)]
         public string Password { get; set; } = string.Empty;
         [Column("rol")]
+        [MaxLength(50)]
         public string Rol { get; set; } = string.Empty;
         [Column("creationDate")]
         public DateTime CreationDate { get; set; } = DateTime.Now;

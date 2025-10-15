@@ -11,9 +11,13 @@ namespace SmartLogis.API.Models
     {
         [Key]
         public int IdRuta { get; set; }
+        [MaxLength(500)]
         public string CodigoRuta { get; set; } = string.Empty;
+        [MaxLength(500)]
         public string Origen { get; set; } = string.Empty;
+        [MaxLength(500)]
         public string Destino { get; set; } = string.Empty;
+        [MaxLength(500)]
         public int DistanciaKm { get; set; }
         public TimeSpan TiempoEstimadoHoras { get; set; }
         public int IdEstatus { get; set; }

@@ -10,15 +10,17 @@ namespace SmartLogis.API.Models
     public class EstatusEnvio
     {   
         [Key]
-        [Column("idEstatus")]
-        public int IdEstatus { get; set; }
+        [Column("idEstatusEnvio")]
+        public int IdEstatusEnvio { get; set; }
         [Column("idEnvio")]
         public int IdEnvio { get; set; }
         [Column("fechaHora")]
         public DateTime FechaHora { get; set; }
         [Column("ubicacion")]
+        [MaxLength(500)]
         public string Ubicacion { get; set; } = string.Empty;
         [Column("comentario")]
+        [MaxLength(500)]
         public string Comentario { get; set; } = string.Empty;
 
         [ForeignKey("idEnvio")]

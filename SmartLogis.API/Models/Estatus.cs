@@ -14,6 +14,7 @@ namespace SmartLogis.API.Models
         public int IdEstatus { get; set; }
         [Required]
         [Column("nombre")]
+        [MaxLength(130)]
         public string Nombre { get; set; } = string.Empty;
     }
 }
