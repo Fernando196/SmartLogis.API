@@ -28,10 +28,10 @@ namespace SmartLogis.API.Controllers
             var estatusDto = estatus.Adapt<List<EstatusDto>>();
             return Ok(estatusDto);
         }
-        [HttpGet("{id}", Name = "GetCliente")]
+        [HttpGet("{id}", Name = "GetEstatus")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetClienteById(int id)
+        public async Task<IActionResult> GetEstatusById(int id)
         {
             var estatus = await _estatusService.GetByIdAsync(id);
             var estatusDto = estatus.Adapt<EstatusDto>();
@@ -51,7 +51,7 @@ namespace SmartLogis.API.Controllers
             var estatus = createEstatusDto.Adapt<Estatus>();
             var createdEstatus = await _estatusService.CreateAsync(estatus);
             var createdEstatusDto = createdEstatus.Adapt<EstatusDto>();
-            return CreatedAtRoute("GetCliente", new { id = createdEstatusDto.IdEstatus }, createdEstatusDto);
+            return CreatedAtRoute("GetEstatus", new { id = createdEstatusDto.IdEstatus }, createdEstatusDto);
         }
         [HttpPut("{id}", Name = "UpdateEstatus")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -68,11 +68,11 @@ namespace SmartLogis.API.Controllers
             await _estatusService.UpdateAsync(id, estatus);
             return NoContent();
         }
-        [HttpDelete("{id}", Name = "DeleteCliente")]
+        [HttpDelete("{id}", Name = "DeleteEstatus")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> DeleteCliente(int id)
+        public async Task<IActionResult> DeleteEstatus(int id)
         {
             if (id <= 0)
             {
