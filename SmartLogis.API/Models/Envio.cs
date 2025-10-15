@@ -18,25 +18,30 @@ namespace SmartLogis.API.Models
         [Column("idCliente")]
         public int IdCliente { get; set; }
         [Column("numeroGuia")]
+        [MaxLength(50)]
         public string NumeroGuia { get; set; } = string.Empty;
         [Column("origen")]
+        [MaxLength(250)]
         public string Origen { get; set; } = string.Empty;
         [Column("destino")]
+        [MaxLength(500)]
         public string Destino { get; set; } = string.Empty;
         [Range(0, double.MaxValue)]
-        [Column("peso",TypeName = "decimal(18,2)")]
+        [Column("peso", TypeName = "decimal(18,2)")]
         public decimal Peso { get; set; }
         [Range(0, double.MaxValue)]
         [Column("volumen",TypeName = "decimal(18,2)")]
         public decimal Volumen { get; set; }
         [Column("tipoEnvio")]
-        public int TipoEnvio { get; set; }
+        [MaxLength(250)]
+        public string TipoEnvio { get; set; } = string.Empty;
         [Column("fechaSalida")]
-        public DateTime FechaSalida { get; set; }
+        public DateTime? FechaSalida { get; set; }
         [Column("fechaEntregaEstimada")]
-        public DateTime FechaEntregaEstimada { get; set; }
+        public DateTime? FechaEntregaEstimada { get; set; }
         [Column("observaciones")]
-        public string Observaciones { get; set; } = string.Empty;
+        [MaxLength(600)]
+        public string? Observaciones { get; set; } = string.Empty;
 
         [ForeignKey("IdCliente")]
         public required Cliente Cliente { get; set; }

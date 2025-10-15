@@ -6,7 +6,7 @@ using SmartLogis.API.Models;
 
 namespace SmartLogis.API.Repository.Interfaces;
 
-public interface IClienteRepository : IReposityBase<Cliente>
+public interface IClienteRepository : IRepositoryBase<Cliente>
 {
     Task<ICollection<Envio>> GetEnviosByCliente(int idCliente);
     Task<bool> ClienteExists(string nombre);

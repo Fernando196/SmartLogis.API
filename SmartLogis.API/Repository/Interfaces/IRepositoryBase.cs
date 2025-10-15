@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace SmartLogis.API.Repository.Interfaces;
-public interface IReposityBase<T>
+public interface IRepositoryBase<T>
 {
     IQueryable<T> GetAllQueryable();
     Task<T?> GetByIdAsync(int id);
