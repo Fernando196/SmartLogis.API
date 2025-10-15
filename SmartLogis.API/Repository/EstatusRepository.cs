@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SmartLogis.API.Data;
 using SmartLogis.API.Models;
 using SmartLogis.API.Repository.Interfaces;
 
@@ -9,34 +11,54 @@ namespace SmartLogis.API.Repository
 {
     public class EstatusRepository : IEstatusRepository
     {
-        public Task<bool> AddAsync(Estatus entity)
+        private readonly ApplicationDbContext _db;
+
+        public EstatusRepository(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
         }
 
-        public Task<bool> DeleteAsync(Estatus entity)
+        public async Task<bool> AddAsync(Estatus estatus)
         {
-            throw new NotImplementedException();
+            await _db.AddAsync(estatus);
+            return await SaveAsync();
+        }
+
+        public async Task<bool> DeleteAsync(Estatus estatus)
+        {
+            _db.Remove(estatus);
+            return await SaveAsync();
+        }
+
+        public async Task<bool> EnvioExists(string nombre)
+        {
+            return await _db.Estatus.AnyAsync(estatus => estatus.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
+        }
+
+        public async Task<bool> EnvioExists(int id)
+        {
+            return await _db.Estatus.AnyAsync(Estatus => Estatus.IdEstatus == id);
         }
 
         public IQueryable<Estatus> GetAllQueryable()
         {
-            throw new NotImplementedException();
+            return _db.Estatus.AsQueryable();
         }
 
-        public Task<Estatus?> GetByIdAsync(int id)
+        public async Task<Estatus?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _db.Estatus.FirstOrDefaultAsync(estatus => estatus.IdEstatus == id);
         }
 
-        public Task<bool> SaveAsync()
+        public async Task<bool> SaveAsync()
         {
-            throw new NotImplementedException();
+            return await _db.SaveChangesAsync() >= 0;
         }
 
-        public Task<bool> UpdateAsync(Estatus entity)
+        public async Task<bool> UpdateAsync(Estatus estatus)
         {
-            throw new NotImplementedException();
+            _db.Estatus.Update(estatus);
+            return await SaveAsync();
         }
     }
 }

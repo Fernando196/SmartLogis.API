@@ -19,6 +19,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 
+builder.Services.AddScoped<IEstatusRepository, EstatusRepository>();
+builder.Services.AddScoped<IEstatusService, EstatusService>();
+
 var typeAdapterConfig = new TypeAdapterConfig();
 ClienteMapping.RegisterMappings(typeAdapterConfig);
 

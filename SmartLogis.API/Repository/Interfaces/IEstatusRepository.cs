@@ -8,6 +8,7 @@ namespace SmartLogis.API.Repository.Interfaces
 {
     public interface IEstatusRepository:IRepositoryBase<Estatus>
     {
-        
+        Task<bool> EnvioExists(string nombre);
+        Task<bool> EnvioExists(int id);
     }
 }
