@@ -151,9 +151,9 @@ namespace SmartLogis.API.Migrations
                         .HasColumnName("cantidad");
 
                     b.Property<string>("DescripcionCarga")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("descripcionCarga");
+                        .HasMaxLength(350)
+                        .HasColumnType("nvarchar(350)")
+                        .HasColumnName("decripcionCarga");
 
                     b.Property<int?>("EnvioIdEnvio")
                         .HasColumnType("int");
@@ -221,11 +221,11 @@ namespace SmartLogis.API.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasColumnName("destino");
 
-                    b.Property<DateTime>("FechaEntregaEstimada")
+                    b.Property<DateTime?>("FechaEntregaEstimada")
                         .HasColumnType("datetime2")
                         .HasColumnName("fechaEntregaEstimada");
 
-                    b.Property<DateTime>("FechaSalida")
+                    b.Property<DateTime?>("FechaSalida")
                         .HasColumnType("datetime2")
                         .HasColumnName("fechaSalida");
 
@@ -233,9 +233,9 @@ namespace SmartLogis.API.Migrations
                         .HasColumnType("int")
                         .HasColumnName("idCliente");
 
-                    b.Property<int>("IdEstatus")
+                    b.Property<int>("IdEstatusEnvio")
                         .HasColumnType("int")
-                        .HasColumnName("idEstatus");
+                        .HasColumnName("idEstatusEnvio");
 
                     b.Property<string>("NumeroGuia")
                         .IsRequired()
@@ -244,7 +244,6 @@ namespace SmartLogis.API.Migrations
                         .HasColumnName("numeroGuia");
 
                     b.Property<string>("Observaciones")
-                        .IsRequired()
                         .HasMaxLength(600)
                         .HasColumnType("nvarchar(600)")
                         .HasColumnName("observaciones");
@@ -289,7 +288,8 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(130)
+                        .HasColumnType("nvarchar(130)")
                         .HasColumnName("nombre");
 
                     b.HasKey("IdEstatus");
@@ -308,7 +308,8 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Comentario")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
                         .HasColumnName("comentario");
 
                     b.Property<DateTime>("FechaHora")
@@ -321,7 +322,8 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Ubicacion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
                         .HasColumnName("ubicacion");
 
                     b.Property<int>("idEnvio")
@@ -348,13 +350,16 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("CodigoRuta")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Destino")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("DistanciaKm")
+                        .HasMaxLength(500)
                         .HasColumnType("int");
 
                     b.Property<int>("IdEstatus")
@@ -362,7 +367,8 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Origen")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<TimeSpan>("TiempoEstimadoHoras")
                         .HasColumnType("time");
@@ -385,7 +391,8 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
                         .HasColumnName("email");
 
                     b.Property<int>("IdEstatus")
@@ -393,22 +400,26 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
                         .HasColumnName("nombre");
 
                     b.Property<string>("Placas")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
                         .HasColumnName("placas");
 
                     b.Property<string>("Telefono")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
                         .HasColumnName("telefono");
 
                     b.Property<string>("TipoUnidad")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
                         .HasColumnName("tipoUnidad");
 
                     b.HasKey("IdTransportista");
@@ -437,22 +448,26 @@ namespace SmartLogis.API.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
                         .HasColumnName("email");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)")
                         .HasColumnName("nombre");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
                         .HasColumnName("password");
 
                     b.Property<string>("Rol")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
                         .HasColumnName("rol");
 
                     b.HasKey("IdUsuario");
