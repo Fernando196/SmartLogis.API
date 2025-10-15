@@ -72,9 +72,4 @@ public class ClienteRepository : IClienteRepository
     {
         return await _db.SaveChangesAsync() >= 0 ? true : false;
     }
-
-    public async Task<IEnumerable<Cliente>> FindAsync(Expression<Func<Cliente, bool>> expression)
-    {
-        return await _db.Cliente.Where(expression).ToListAsync();
-    }
 }

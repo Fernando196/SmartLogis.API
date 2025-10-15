@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using SmartLogis.API.Data;
 using SmartLogis.API.Models;
 using SmartLogis.API.Repository.Interfaces;
@@ -23,34 +24,30 @@ public class EnvioRepository : IEnvioRepository
         return await SaveAsync();
     }
 
-    public Task<bool> DeleteAsync(Envio entity)
+    public async Task<bool> DeleteAsync(Envio entity)
     {
-        throw new NotImplementedException();
+        _db.Envio.Remove(entity);
+        return await SaveAsync();
     }
 
-    public Task<bool> EnvioExists(string nombre)
+    public Task<bool> EnvioExists(string numeroGuia)
     {
-        throw new NotImplementedException();
+        return _db.Envio.AnyAsync(envio => envio.NumeroGuia == numeroGuia);
     }
 
     public Task<bool> EnvioExists(int id)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Envio>> FindAsync(Expression<Func<Envio, bool>> expression)
-    {
-        throw new NotImplementedException();
+        return _db.Envio.AnyAsync(envio => envio.IdEnvio == id);
     }
 
     public IQueryable<Envio> GetAllQueryable()
     {
-        throw new NotImplementedException();
+        return _db.Envio.AsQueryable();
     }
 
-    public Task<Envio?> GetByIdAsync(int id)
+    public async Task<Envio?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _db.Envio.FirstOrDefaultAsync(envio => envio.IdEnvio == id);
     }
 
     public async Task<bool> SaveAsync()
@@ -58,8 +55,9 @@ public class EnvioRepository : IEnvioRepository
         return await _db.SaveChangesAsync() >= 0;
     }
 
-    public Task<bool> UpdateAsync(Envio entity)
+    public async Task<bool> UpdateAsync(Envio entity)
     {
-        throw new NotImplementedException();
+        _db.Envio.Update(entity);
+        return await SaveAsync();
     }
 }

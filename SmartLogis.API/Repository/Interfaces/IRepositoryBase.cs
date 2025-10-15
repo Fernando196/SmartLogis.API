@@ -13,5 +13,4 @@ public interface IRepositoryBase<T>
     Task<bool> UpdateAsync(T entity);
     Task<bool> DeleteAsync(T entity);
     Task<bool> SaveAsync();
-    Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> expression);
 }

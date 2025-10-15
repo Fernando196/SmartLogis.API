@@ -8,6 +8,6 @@ namespace SmartLogis.API.Repository.Interfaces;
 
 public interface IEnvioRepository : IRepositoryBase<Envio>
 {
-    Task<bool> EnvioExists(string nombre);
+    Task<bool> EnvioExists(string numeroGuia);
     Task<bool> EnvioExists(int id);
 }

@@ -10,8 +10,8 @@ namespace SmartLogis.API.Models
     public class EstatusEnvio
     {   
         [Key]
-        [Column("idEstatusEnvio")]
-        public int IdEstatusEnvio { get; set; }
+        [Column("idEstatus")]
+        public int IdEstatus { get; set; }
         [Column("idEnvio")]
         public int IdEnvio { get; set; }
         [Column("fechaHora")]
