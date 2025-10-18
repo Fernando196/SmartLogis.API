@@ -13,8 +13,8 @@ namespace SmartLogis.API.Models
         [Column("idEnvio")]
         public int IdEnvio { get; set; }
         [Required]
-        [Column("idEstatusEnvio")]
-        public int IdEstatusEnvio { get; set; }
+        [Column("idEstatus")]
+        public int IdEstatus { get; set; }
         [Column("idCliente")]
         public int IdCliente { get; set; }
         [Column("numeroGuia")]

@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -62,6 +62,11 @@ namespace SmartLogis.API.Data
                 .WithMany()
                 .HasForeignKey(d => d.IdRuta)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<EstatusEnvio>()
+                .HasOne(e => e.Envio)
+                .WithMany(e => e.EstatusEnvios)
+                .HasForeignKey(e => e.IdEnvio);
 
             base.OnModelCreating(modelBuilder);
         }
