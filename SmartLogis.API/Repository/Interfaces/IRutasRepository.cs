@@ -9,5 +9,7 @@ namespace SmartLogis.API.Repository.Interfaces
     public interface IRutasRepository : IRepositoryBase<Rutas>
     {
         Task<bool> RutaExists(int id);
+        Task<bool> RutaExists(string nombre);
+        Task<int> CountAsync();
     }
 }

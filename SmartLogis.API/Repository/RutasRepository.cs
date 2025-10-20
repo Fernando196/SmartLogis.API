@@ -23,6 +23,11 @@ public class RutasRepository : IRutasRepository
         return await SaveAsync();
     }
 
+    public async Task<int> CountAsync()
+    {
+        return await _db.Rutas.CountAsync();
+    }
+
     public Task<bool> DeleteAsync(Rutas ruta)
     {
         _db.Rutas.Remove(ruta);
@@ -42,6 +47,11 @@ public class RutasRepository : IRutasRepository
     public Task<bool> RutaExists(int id)
     {
         return _db.Rutas.AnyAsync(r => r.IdRuta == id);
+    }
+
+    public Task<bool> RutaExists(string codigoRuta)
+    {
+        return _db.Rutas.AnyAsync(r => r.CodigoRuta == codigoRuta);
     }
 
     public async Task<bool> SaveAsync()
