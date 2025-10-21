@@ -81,7 +81,7 @@ namespace SmartLogis.API.Migrations
                     Origen = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     Destino = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DistanciaKm = table.Column<int>(type: "int", maxLength: 500, nullable: false),
-                    TiempoEstimadoHoras = table.Column<TimeSpan>(type: "time", nullable: false),
+                    TiempoEstimadoHoras = table.Column<int>(type: "int", nullable: false),
                     IdEstatus = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -146,7 +146,7 @@ namespace SmartLogis.API.Migrations
                 {
                     idEnvio = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idEstatusEnvio = table.Column<int>(type: "int", nullable: false),
+                    idEstatus = table.Column<int>(type: "int", nullable: false),
                     idCliente = table.Column<int>(type: "int", nullable: false),
                     numeroGuia = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     origen = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
@@ -247,8 +247,8 @@ namespace SmartLogis.API.Migrations
                 {
                     table.PrimaryKey("PK_EstatusEnvio", x => x.idEstatusEnvio);
                     table.ForeignKey(
-                        name: "FK_EstatusEnvio_Envio_idEnvio1",
-                        column: x => x.idEnvio1,
+                        name: "FK_EstatusEnvio_Envio_idEnvio",
+                        column: x => x.idEnvio,
                         principalTable: "Envio",
                         principalColumn: "idEnvio",
                         onDelete: ReferentialAction.Cascade);
@@ -310,9 +310,9 @@ namespace SmartLogis.API.Migrations
                 column: "idCliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EstatusEnvio_idEnvio1",
+                name: "IX_EstatusEnvio_idEnvio",
                 table: "EstatusEnvio",
-                column: "idEnvio1");
+                column: "idEnvio");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rutas_IdEstatus",

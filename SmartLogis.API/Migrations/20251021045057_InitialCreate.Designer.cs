@@ -12,8 +12,8 @@ using SmartLogis.API.Data;
 namespace SmartLogis.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251018050058_OnUpdateEnvioModel")]
-    partial class OnUpdateEnvioModel
+    [Migration("20251021045057_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -373,8 +373,8 @@ namespace SmartLogis.API.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<TimeSpan>("TiempoEstimadoHoras")
-                        .HasColumnType("time");
+                    b.Property<int>("TiempoEstimadoHoras")
+                        .HasColumnType("int");
 
                     b.HasKey("IdRuta");
 

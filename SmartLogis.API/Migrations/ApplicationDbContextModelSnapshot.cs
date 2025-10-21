@@ -370,8 +370,8 @@ namespace SmartLogis.API.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<TimeSpan>("TiempoEstimadoHoras")
-                        .HasColumnType("time");
+                    b.Property<int>("TiempoEstimadoHoras")
+                        .HasColumnType("int");
 
                     b.HasKey("IdRuta");
 
