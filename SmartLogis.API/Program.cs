@@ -22,6 +22,12 @@ builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IEstatusRepository, EstatusRepository>();
 builder.Services.AddScoped<IEstatusService, EstatusService>();
 
+builder.Services.AddScoped<ITransportistaRepository, TransportistaRepository>();
+builder.Services.AddScoped<ITransportistaService, TransportistaService>();
+
+builder.Services.AddScoped<IRutasRepository, RutasRepository>();
+builder.Services.AddScoped<IRutasService, RutasService>();
+
 var typeAdapterConfig = new TypeAdapterConfig();
 ClienteMapping.RegisterMappings(typeAdapterConfig);
 

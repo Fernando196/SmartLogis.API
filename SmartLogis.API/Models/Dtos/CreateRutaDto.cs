@@ -8,8 +8,6 @@ namespace SmartLogis.API.Models.Dtos
 {
     public class CreateRutasDto
     {
-        [Required(ErrorMessage = "El CodigoRuta es requerido")]
-        public string CodigoRuta { get; set; } = string.Empty;
         [Required(ErrorMessage = "El Origen es requerido")]
         public string Origen { get; set; } = string.Empty;
         [Required(ErrorMessage = "El Destino es requerido")]
@@ -17,7 +15,7 @@ namespace SmartLogis.API.Models.Dtos
         [Required(ErrorMessage = "El DistanciaKm es requerido")]
         public int DistanciaKm { get; set; }
         [Required(ErrorMessage = "El TiempoEstimadoHoras es requerido")]
-        public TimeSpan TiempoEstimadoHoras { get; set; }
+        public int TiempoEstimadoHoras { get; set; }
         [Required(ErrorMessage = "El idEstatus es requerido")]
         public int IdEstatus { get; set; }
     }

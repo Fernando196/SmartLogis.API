@@ -23,8 +23,6 @@ namespace SmartLogis.API.Services
 
         public async Task<Rutas> CreateAsync(Rutas ruta)
         {
-            if (string.IsNullOrWhiteSpace(ruta.CodigoRuta))
-                throw new ApiException(400, "El código de la ruta es requerido");
 
             if (string.IsNullOrWhiteSpace(ruta.Origen))
                 throw new ApiException(400, "El origen de la ruta es requerido");

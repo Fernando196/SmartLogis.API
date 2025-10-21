@@ -19,7 +19,7 @@ namespace SmartLogis.API.Models
         public string Destino { get; set; } = string.Empty;
         [MaxLength(500)]
         public int DistanciaKm { get; set; }
-        public TimeSpan TiempoEstimadoHoras { get; set; }
+        public int TiempoEstimadoHoras { get; set; }
         public int IdEstatus { get; set; }
         [ForeignKey("IdEstatus")]
         public required Estatus Estatus { get; set; }
