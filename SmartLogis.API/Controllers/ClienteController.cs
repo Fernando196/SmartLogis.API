@@ -11,8 +11,12 @@ using SmartLogis.API.Services.Interfaces;
 
 namespace SmartLogis.API.Controllers
 {
+    /// <summary>
+    /// Controlador para la gestión de clientes
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
+    [Produces("application/json")]
     public class ClienteController : ControllerBase
     {
         private readonly IClienteService _clienteService;
@@ -22,16 +26,26 @@ namespace SmartLogis.API.Controllers
             _clienteService = clienteService;
         }
 
+        /// <summary>
+        /// Obtiene todos los clientes con filtros opcionales
+        /// </summary>
+        /// <param name="body">Filtros opcionales para la consulta</param>
+        /// <returns>Lista de clientes</returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ClienteDto>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetClientes([FromBody] FilterRequest? body)
         {
             var clientes = await _clienteService.GetAllAsync(body?.Filters);
             var clientesDto = clientes.Adapt<List<ClienteDto>>();
             return Ok(clientesDto);
         }
+        /// <summary>
+        /// Obtiene un cliente por su ID
+        /// </summary>
+        /// <param name="id">ID del cliente</param>
+        /// <returns>Cliente encontrado</returns>
         [HttpGet("{id}", Name = "GetCliente")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ClienteDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetClienteById(int id)
         {
@@ -47,10 +61,15 @@ namespace SmartLogis.API.Controllers
             var envios = await _clienteService.GetEnviosByCliente(id);
             return Ok(envios);
         }
+        /// <summary>
+        /// Crea un nuevo cliente
+        /// </summary>
+        /// <param name="createClienteDto">Datos del cliente a crear</param>
+        /// <returns>Cliente creado</returns>
         [HttpPost]
+        [ProducesResponseType(typeof(ClienteDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> CreateCliente([FromBody] CreateClienteDto createClienteDto)
         {
             if (createClienteDto == null)

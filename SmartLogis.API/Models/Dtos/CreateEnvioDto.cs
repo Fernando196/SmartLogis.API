@@ -14,9 +14,6 @@ namespace SmartLogis.API.Models.Dtos
         [Required(ErrorMessage = "El idCliente es requerido")]
         public int IdCliente { get; set; }
 
-        [Required(ErrorMessage = "El numeroGuia es requerido")]
-        public string NumeroGuia { get; set; } = string.Empty;
-
         [Required(ErrorMessage = "El origen es requerido")]
         public string Origen { get; set; } = string.Empty;
 
