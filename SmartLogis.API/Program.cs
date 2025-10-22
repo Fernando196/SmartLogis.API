@@ -28,6 +28,9 @@ builder.Services.AddScoped<ITransportistaService, TransportistaService>();
 builder.Services.AddScoped<IRutasRepository, RutasRepository>();
 builder.Services.AddScoped<IRutasService, RutasService>();
 
+builder.Services.AddScoped<IEnvioRepository, EnvioRepository>();
+builder.Services.AddScoped<IEnvioService, EnvioService>();
+
 var typeAdapterConfig = new TypeAdapterConfig();
 ClienteMapping.RegisterMappings(typeAdapterConfig);
 

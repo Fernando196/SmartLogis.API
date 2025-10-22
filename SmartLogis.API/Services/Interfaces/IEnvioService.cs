@@ -8,6 +8,6 @@ namespace SmartLogis.API.Services.Interfaces
 {
     public interface IEnvioService: IServiceBase<Envio>
     {
-        
+        Task<string> GenerarNumeroGuiaAsync();
     }
 }

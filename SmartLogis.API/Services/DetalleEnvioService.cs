@@ -13,9 +13,10 @@ namespace SmartLogis.API.Services
         private IEnvioRepository _envioRepository;
         private IEstatusRepository _estatusRepository;
 
-        public DetalleEnvioService(IEnvioRepository envioRepository)
+        public DetalleEnvioService(IEnvioRepository envioRepository, IEstatusRepository estatusRepository)
         {
             _envioRepository = envioRepository;
+            _estatusRepository = estatusRepository;
         }
 
         public Task<DetallesEnvio> CreateAsync(DetallesEnvio detallEnvio)
@@ -33,7 +34,7 @@ namespace SmartLogis.API.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<DetallesEnvio>> GetAllAsync(Dictionary<string, Filter> body)
+        public Task<IEnumerable<DetallesEnvio>> GetAllAsync(Dictionary<string, Filter>? body)
         {
             throw new NotImplementedException();
         }

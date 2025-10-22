@@ -32,7 +32,7 @@ public class TransportistaService : ITransportistaService
             throw new ApiException(400, "Ya existe un transportista con el mismo nombre");
         }
 
-        if(!await _estatusRepository.EnvioExists(transportista.IdEstatus))
+        if(!await _estatusRepository.EstatusExists(transportista.IdEstatus))
         {
             throw new ApiException(400, "El estatus proporcionado no existe");
         }

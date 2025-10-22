@@ -10,4 +10,5 @@ public interface IEnvioRepository : IRepositoryBase<Envio>
 {
     Task<bool> EnvioExists(string numeroGuia);
     Task<bool> EnvioExists(int id);
+    Task<int> CountAsync();
 }

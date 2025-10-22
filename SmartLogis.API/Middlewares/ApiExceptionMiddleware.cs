@@ -35,7 +35,7 @@ namespace SmartLogis.API
             {
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = 500;
-                var response = new { status = 500, message = "Ocurrio un error inesperado" };
+                var response = new { status = 500, message = "Ocurrio un error inesperado: " + ex.Message };
                 await context.Response.WriteAsJsonAsync(response);
             }
         }

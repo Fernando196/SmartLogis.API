@@ -33,7 +33,7 @@ namespace SmartLogis.API.Services
 
         public async Task DeleteAsync(int id)
         {
-            if (!await _estatusRepository.EnvioExists(id))
+            if (!await _estatusRepository.EstatusExists(id))
                 throw new ApiException(404, "No existe el estatus a eliminar");
 
             var estatus = await _estatusRepository.GetByIdAsync(id);
@@ -59,7 +59,7 @@ namespace SmartLogis.API.Services
         {
             if (string.IsNullOrWhiteSpace(estatus.Nombre))
                 throw new ApiException(400, "El nombre es requeridol");
-            if (!await _estatusRepository.EnvioExists(id))
+            if (!await _estatusRepository.EstatusExists(id))
                 throw new ApiException(404, "No existe el estatus a buscar");
 
             estatus.IdEstatus = id;

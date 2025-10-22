@@ -30,12 +30,12 @@ namespace SmartLogis.API.Repository
             return await SaveAsync();
         }
 
-        public async Task<bool> EnvioExists(string nombre)
+        public async Task<bool> EstatusExists(string nombre)
         {
             return await _db.Estatus.AnyAsync(estatus => estatus.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
         }
 
-        public async Task<bool> EnvioExists(int id)
+        public async Task<bool> EstatusExists(int id)
         {
             return await _db.Estatus.AnyAsync(Estatus => Estatus.IdEstatus == id);
         }

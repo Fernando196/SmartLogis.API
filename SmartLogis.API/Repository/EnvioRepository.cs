@@ -24,6 +24,11 @@ public class EnvioRepository : IEnvioRepository
         return await SaveAsync();
     }
 
+    public Task<int> CountAsync()
+    {
+        return _db.Envio.CountAsync();
+    }
+
     public async Task<bool> DeleteAsync(Envio entity)
     {
         _db.Envio.Remove(entity);
