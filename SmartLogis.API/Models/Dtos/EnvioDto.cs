@@ -19,5 +19,9 @@ namespace SmartLogis.API.Models.Dtos
         public DateTime FechaSalida { get; set; }
         public DateTime FechaEntregaEstimada { get; set; }
         public string Observaciones { get; set; } = string.Empty;
+
+        public Cliente Cliente { get; set; }
+        public ICollection<DetallesEnvio> DetallesEnvio { get; set; } = new List<DetallesEnvio>();
+        public ICollection<EstatusEnvio> EstatusEnvios { get; set; } = new List<EstatusEnvio>();
     }
 }

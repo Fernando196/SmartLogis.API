@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SmartLogis.API.Data;
 using SmartLogis.API.Models;
+using SmartLogis.API.Models.Dtos;
 using SmartLogis.API.Repository.Interfaces;
 
 namespace SmartLogis.API.Repository;
@@ -47,12 +48,29 @@ public class EnvioRepository : IEnvioRepository
 
     public IQueryable<Envio> GetAllQueryable()
     {
-        return _db.Envio.AsQueryable();
+        return _db.Envio.Include(e => e.Cliente).AsQueryable();
     }
 
     public async Task<Envio?> GetByIdAsync(int id)
     {
-        return await _db.Envio.FirstOrDefaultAsync(envio => envio.IdEnvio == id);
+        return await _db.Envio
+            .Where(envio => envio.IdEnvio == id)
+            .Select(e => new Envio
+            {
+                IdEnvio = e.IdEnvio,
+                IdEstatus = e.IdEstatus,
+                IdCliente = e.IdCliente,
+                NumeroGuia = e.NumeroGuia,
+                Origen = e.Origen,
+                Destino = e.Destino,
+                Peso = e.Peso,
+                Volumen = e.Volumen,
+                Cliente = new Cliente
+                {
+                    IdCliente = e.Cliente.IdCliente,
+                    Nombre = e.Cliente.Nombre,
+                }
+            }).FirstOrDefaultAsync();
     }
 
     public async Task<bool> SaveAsync()
